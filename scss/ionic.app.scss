@@ -1,0 +1,60 @@
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+
+@import "color";
+
+/* stop scroll */
+.scroll-content {
+  display: table !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+.scroll {
+  display: table-cell !important;
+  vertical-align: middle !important;
+  text-align: center !important;
+}
+
+body { color : $color1; }
+.bar { background-color : transparent !important;}
+.bar.bar-light { border-bottom: solid 3px $color1 !important;}
+.bar .title { font-size : 25px !important; color : $color1 !important; text-align: left !important;}
+
+a { text-decoration: none; }
+
+.body_bis { padding-top : 55px;}
+
+
+/* fond ecran */
+html, body, .body_bis, .view-container { 
+  background: url(../img/16.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.pane, .view { background-color : transparent !important;}
+
+
+
+/* playlistCSS */
+ionic-timepicker {
+  margin: auto;
+}
+.item-thumbnail-left {
+  min-height: 75px;
+  background: url(../img/15.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.item-thumbnail-left > img:first-child {
+  max-height: 55px !important;
+  max-width: 60px !important;
+}

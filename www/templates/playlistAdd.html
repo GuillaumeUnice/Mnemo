@@ -1,0 +1,52 @@
+<ion-view view-title="PlaylistAdd">
+
+	<ion-content>
+	
+	<div class="bar bar-header bar-light">
+		<h1 class="title">Ajouter une chanson</h1>
+	</div>
+
+	<div class="body_bis">
+		<div class="row ">
+		 	<div class="col">
+				<div class="row">
+					<input type="text" name="search" ng-model="search" placeholder="Tapez ici votre chanson!" />
+				</div>
+				<div class="row">
+		  			<button class="button button-block button-positive">
+					  Valider
+					</button>
+		 		</div>
+		 	</div>
+		  	<div class="col col-75">
+		  		<div class="row">
+		  			Appuyer sur une chanson pour la sélectionner, puis appuyer sur "Ajouter à la liste"
+		  		</div>
+				<div class="list" style="border: 3px solid $color2; padding-bottom: 10px; height: 65vh;  padding-bottom: 10px; overflow-y:scroll;">
+				    <span class="item item-thumbnail-left item-button-right">
+				      <img src="cover.jpg">
+				      <h2>La vie en rose</h2>
+				      <p>Edith Piaf</p>
+
+				      <button class="button button-large button-positive">
+					      <i class="icon ion-volume-medium"></i>
+					  </button>
+		
+
+					  <!--<div class="button-bar">
+						<span class="button button-positive"><i class="icon ion-volume-medium"></i></span>
+						<span class="button button-positive"><i class="icon ion-checkmark"></i></span>
+					  </div>-->
+				    </span>
+				</div>
+				<div class="row">
+		  			<button class="button button-block button-positive">
+					  Ajouter à liste
+					</button>
+		 		</div>
+		  	</div>
+		</div>
+	</div>
+
+	</ion-content>
+</ion-view>

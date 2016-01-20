@@ -1,0 +1,12 @@
+{
+  "name": "WISIWYA",
+  "app_id": "b561a994",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}
