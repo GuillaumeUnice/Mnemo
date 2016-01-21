@@ -1,0 +1,18 @@
+<div class="modal">
+        <header class="bar bar-header bar-positive">
+          <h1 class="title">Supprimer une liste</h1>
+          <div class="button button-clear" ng-click="deleteListModal.hide()"><span class="icon ion-close"></span></div>
+        </header>
+        <content has-header="true" padding="true" style="margin-top: 30px;">
+	
+			<div class="row">
+				<p> Etes vous sûr de vouloir supprimer la liste : {{$root.currentPlaylist.name}} </p>
+			</div>
+			<div class="row">
+	  			<button ng-click="deleteList()" type="submit" class="button button-block button-positive">
+				  Supprimer
+				</button>
+	 		</div>
+		
+        </content>
+</div>

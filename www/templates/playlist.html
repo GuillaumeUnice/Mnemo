@@ -9,7 +9,7 @@
 	<div class="body_bis">
 		<div class="row ">
 		 	<div class="col">
-     		<button class="button button-positive" ng-click="modal.show()">Ajouter une liste</button>
+     		<button class="button button-positive" ng-click="createListModal.show()">Ajouter une liste</button>
 		 	<div ng-if="$root.playlists.length !== 0">
 				<div class="row">Horraire actuel pour le lancement de cette liste</div>
 				<div class="row">
@@ -19,12 +19,12 @@
 				  </button>
 				</ionic-timepicker>
 				<!--	
-				<ionic-timepicker input-obj="timePickerObject">
-				  <button class="button button-block button-positive overflowShow">
-				    <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
-				  </button>
-				</ionic-timepicker>
-			-->
+					<ionic-timepicker input-obj="timePickerObject">
+					  <button class="button button-block button-positive overflowShow">
+					    <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
+					  </button>
+					</ionic-timepicker>
+				-->
 				</div>
 				<div class="row">
 					<a href="#/playlistadd">
@@ -53,8 +53,8 @@
 		  		</div>
 		  		<div class="row">
 		  		<div class="button-bar">
-				  <span class="button button-positive">Renommer la liste</span>
-				  <span class="button button-positive">Supprimer la liste</span>
+				  <span ng-click="renameListModal.show()" class="button button-positive">Renommer la liste</span>
+				  <span ng-click="deleteListModal.show()" class="button button-positive">Supprimer la liste</span>
 				</div>
 				</div>
 				<div class="list" style="border: 3px solid $color2; padding-bottom: 10px; height: 65vh;  padding-bottom: 10px; overflow-y:scroll;">

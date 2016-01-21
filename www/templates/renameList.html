@@ -1,0 +1,23 @@
+<div class="modal">
+        <header class="bar bar-header bar-positive">
+          <h1 class="title">Renommer la liste</h1>
+          <div class="button button-clear" ng-click="renameListModal.hide()"><span class="icon ion-close"></span></div>
+        </header>
+        <content has-header="true" padding="true" style="margin-top: 30px;">
+	 		<form  name="renameList" ng-submit="renameList(newNameList)" novalidate>
+				<div class="row">
+					<div class="col">
+						<label for="newListName" style="cursor: pointer; font-size: 1.1em; color: black; padding-right : 10px;">
+							Nouveau nom de la liste :
+						</label>
+						<input type="text" name="newListName" id="newListName" ng-model="newNameList" placeholder="Tapez ici le nom de la liste!" required />
+					</div>
+				</div>
+				<div class="row">
+		  			<button type="submit" class="button button-block button-positive" ng-disabled="renameList.$invalid">
+					  Renommer
+					</button>
+		 		</div>
+		 	</form>
+        </content>
+</div>

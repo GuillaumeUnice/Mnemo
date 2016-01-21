@@ -3,7 +3,7 @@ app.controller('playlistController', function($scope, $rootScope, $ionicModal, Y
   //initialize
   $rootScope.playlists = [];
   $rootScope.currentPlaylist = [];
-  
+
   $scope.videos = [];
   Youtube.getSearchVideos("Edith Piaf").then(function(data){
       $scope.videos = data;
@@ -54,12 +54,28 @@ app.controller('playlistController', function($scope, $rootScope, $ionicModal, Y
 
 
 
+    $ionicModal.fromTemplateUrl('templates/deleteList.html', function($ionicModal) {
+        $scope.deleteListModal = $ionicModal;
+    }, {
+        // Use our scope for the scope of the modal to keep it simple
+        scope: $scope,
+        // The animation we want to use for the modal entrance
+        animation: 'slide-in-up'
+    }); 
 
 
 
+    $ionicModal.fromTemplateUrl('templates/createList.html', function($ionicModal) {
+        $scope.createListModal = $ionicModal;
+    }, {
+        // Use our scope for the scope of the modal to keep it simple
+        scope: $scope,
+        // The animation we want to use for the modal entrance
+        animation: 'slide-in-up'
+    });
 
-$ionicModal.fromTemplateUrl('templates/createList.html', function($ionicModal) {
-        $scope.modal = $ionicModal;
+    $ionicModal.fromTemplateUrl('templates/renameList.html', function($ionicModal) {
+        $scope.renameListModal = $ionicModal;
     }, {
         // Use our scope for the scope of the modal to keep it simple
         scope: $scope,
@@ -68,6 +84,7 @@ $ionicModal.fromTemplateUrl('templates/createList.html', function($ionicModal) {
     }); 
 
   $scope.createList = function(listName) {
+    $scope.nameList = "";
     var timePicker = {
       inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
       step: 15,  //Optional
@@ -88,16 +105,32 @@ $ionicModal.fromTemplateUrl('templates/createList.html', function($ionicModal) {
 
     $rootScope.playlists.push({name : listName, content : [], time : timePicker, selected : true});  
     $rootScope.currentPlaylist = $rootScope.playlists[$rootScope.playlists.length -1];
+
+    $scope.createListModal.hide();
   };
 
+  $scope.deleteList = function() {
+    //delete list
+    $rootScope.playlists.splice($rootScope.playlists.indexOf($rootScope.currentPlaylist), 1);
+    
+    if($rootScope.playlists.length !== 0){
+      $rootScope.playlists[0].selected = true;
+    }
+    $scope.deleteListModal.hide();
+  };
 
+  $scope.renameList = function(newName) {
+    console.log("renameList");
 
+    $scope.newNameList = "";
+    
+    $rootScope.currentPlaylist.name = newName;
+    
+    var rang = $rootScope.playlists.indexOf($rootScope.currentPlaylist);
+    $rootScope.playlists[rang].name = newName;
 
-
-
-
-
-
+    $scope.renameListModal.hide();
+  };
 
 })
 
