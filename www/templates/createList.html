@@ -1,0 +1,23 @@
+<div class="modal">
+        <header class="bar bar-header bar-positive">
+          <h1 class="title">Ajouter une liste</h1>
+          <div class="button button-clear" ng-click="modal.hide()"><span class="icon ion-close"></span></div>
+        </header>
+        <content has-header="true" padding="true" style="margin-top: 30px;">
+	 		<form  name="list" ng-submit="createList(nameList)" novalidate>
+				<div class="row">
+					<div class="col">
+						<label for="listName" style="cursor: pointer; font-size: 1.1em; color: black; padding-right : 10px;">
+							Nom de la liste :
+						</label>
+						<input type="text" name="listName" id="listName" ng-model="nameList" placeholder="Tapez ici le nom de la liste!" required />
+					</div>
+				</div>
+				<div class="row">
+		  			<button type="submit" class="button button-block button-positive" ng-disabled="list.$invalid">
+					  Valider
+					</button>
+		 		</div>
+		 	</form>
+        </content>
+</div>
