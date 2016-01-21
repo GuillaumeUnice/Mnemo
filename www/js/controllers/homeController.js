@@ -1,5 +1,8 @@
 app.controller('homeController', function($scope, $rootScope, $cordovaGeolocation, $ionicPlatform, $cordovaLocalNotification) {
 
+
+
+
 	$rootScope.geolocalisations = {
 		school : 
 		{
@@ -51,5 +54,8 @@ app.controller('homeController', function($scope, $rootScope, $cordovaGeolocatio
         alert('GPS error');
       });
   });
+
+
+
 })
 

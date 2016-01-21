@@ -1,4 +1,13 @@
-app.controller('playlistController', function($scope, $rootScope) {
+app.controller('playlistController', function($scope, $rootScope, Youtube) {
+  //initialize
+  $scope.videos = [];
+  Youtube.getSearchVideos("Edith Piaf").then(function(data){
+      $scope.videos = data;
+      console.log(data);
+    }, function(msg){
+      console.log('erreur promesses : ' + msg);
+    });
+
   // initialize datetimePicker
   $scope.timePickerObject = {
     inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
@@ -13,5 +22,24 @@ app.controller('playlistController', function($scope, $rootScope) {
       this.inputEpochTime = val;
     }
   };
+
+  $scope.selectVideo = function(video) {
+    if(video.selected !== undefined) {
+      video.selected = !video.selected;
+    } else {
+      video.selected = true; 
+    }
+    console.log(video);
+  };
+
+  $scope.sendSearch = function(query) {
+    Youtube.getSearchVideos(query).then(function(data){
+      $scope.videos = data;
+      console.log(data);
+    }, function(msg){
+      console.log('erreur promesses : ' + msg);
+    });
+  };
+
 })
 

@@ -9,35 +9,45 @@
 	<div class="body_bis">
 		<div class="row ">
 		 	<div class="col">
-				<div class="row">
-					<input type="text" name="search" ng-model="search" placeholder="Tapez ici votre chanson!" />
-				</div>
-				<div class="row">
-		  			<button class="button button-block button-positive">
-					  Valider
-					</button>
-		 		</div>
+		 		<form  name="search" ng-submit="sendSearch(query)" novalidate>
+					<div class="row">
+						<!--<label for="keyword" style="cursor: pointer; font-size: 1.1em; color: black; padding-right : 10px;">
+							Recherche
+						</label>-->
+						<input type="text" name="keyword" id="keyword" ng-model="query" placeholder="Tapez ici votre chanson!" required />
+
+					</div>
+					<div class="row">
+			  			<button type="submit" class="button button-block button-positive" ng-disabled="search.$invalid">
+						  Valider
+						</button>
+			 		</div>
+			 	</form>
 		 	</div>
 		  	<div class="col col-75">
 		  		<div class="row">
 		  			Appuyer sur une chanson pour la sélectionner, puis appuyer sur "Ajouter à la liste"
 		  		</div>
 				<div class="list" style="border: 3px solid $color2; padding-bottom: 10px; height: 65vh;  padding-bottom: 10px; overflow-y:scroll;">
-				    <span class="item item-thumbnail-left item-button-right">
-				      <img src="cover.jpg">
-				      <h2>La vie en rose</h2>
-				      <p>Edith Piaf</p>
+					<span ng-repeat="video in videos">
 
-				      <button class="button button-large button-positive">
-					      <i class="icon ion-volume-medium"></i>
-					  </button>
-		
+					    <span ng-click="selectVideo(video)" ng-class="{'positive-bg' : video.selected}" class="item item-thumbnail-left item-button-right">
+					      <img src="{{ video.snippet.thumbnails.default.url }}">
+					      <h2>{{ video.snippet.title }}</h2>
+					      <!--<p>Edith Piaf</p>-->
 
-					  <!--<div class="button-bar">
-						<span class="button button-positive"><i class="icon ion-volume-medium"></i></span>
-						<span class="button button-positive"><i class="icon ion-checkmark"></i></span>
-					  </div>-->
-				    </span>
+					      <button class="button button-large button-positive">
+						      <i class="icon ion-volume-medium"></i>
+						  </button>
+			
+
+						  <!--<div class="button-bar">
+							<span class="button button-positive"><i class="icon ion-volume-medium"></i></span>
+							<span class="button button-positive"><i class="icon ion-checkmark"></i></span>
+						  </div>-->
+					    </span>
+
+					</span>
 				</div>
 				<div class="row">
 		  			<button class="button button-block button-positive">

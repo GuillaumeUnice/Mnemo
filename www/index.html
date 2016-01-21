@@ -29,14 +29,45 @@
     <script src="js/filters/isEmpty.js"></script>
     <!-- directives's js -->
     <script src="js/directives/standardTimeMeridian.js"></script>
+
     <!-- services's js -->
     <script src="js/services/Series.js"></script>
+    <script src="js/services/Youtube.js"></script>
+    
     <!-- controllers's js -->
     <script src="js/controllers/homeController.js"></script>
     <script src="js/controllers/playlistController.js"></script>
     <script src="js/controllers/startController.js"></script>
     <script src="js/controllers/settingsController.js"></script>
     
+    <!-- API Youtube -->
+    
+    <script>
+    /*function lol() {
+        console.log("Debut");
+        var request = gapi.client.youtube.search.list({
+                part : "snippet",
+                type : "video",
+                q : "lol",
+                maxResults : 3,
+                order : "viewCount"
+            });
+            request.execute(function(response){
+                var results = response.result;
+
+                console.log(results.items);
+            });
+    }*/
+
+    function init () {
+        gapi.client.setApiKey("AIzaSyAJocfBaEV7ykLKJclh3ZNlLLbo2sGRquU");
+        gapi.client.load("youtube", "v3", function() {
+       //     lol();//yt Ready
+        });
+    }
+    </script>
+<script src="https://apis.google.com/js/client.js?onload=init"></script>
+   
   </head>
   <body ng-app="starter">
 
