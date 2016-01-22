@@ -4,17 +4,17 @@
           <div class="button button-clear" ng-click="renameListModal.hide()"><span class="icon ion-close"></span></div>
         </header>
         <content has-header="true" padding="true" style="margin-top: 30px;">
-	 		<form  name="renameList" ng-submit="renameList(newNameList)" novalidate>
+	 		<form  name="renameListForm" ng-submit="renameList(renameListModal.newNameList);" novalidate>
 				<div class="row">
 					<div class="col">
-						<label for="newListName" style="cursor: pointer; font-size: 1.1em; color: black; padding-right : 10px;">
+						<label for="newListName">
 							Nouveau nom de la liste :
 						</label>
-						<input type="text" name="newListName" id="newListName" ng-model="newNameList" placeholder="Tapez ici le nom de la liste!" required />
+						<input type="text" name="newListName" id="newListName" ng-model="renameListModal.newNameList" placeholder="Tapez ici le nom de la liste!" required />
 					</div>
 				</div>
 				<div class="row">
-		  			<button type="submit" class="button button-block button-positive" ng-disabled="renameList.$invalid">
+		  			<button type="submit" class="button button-block button-positive" ng-disabled="renameListForm.$invalid">
 					  Renommer
 					</button>
 		 		</div>

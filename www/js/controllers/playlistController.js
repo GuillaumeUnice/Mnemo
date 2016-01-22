@@ -1,6 +1,8 @@
 app.controller('playlistController', function($scope, $rootScope, $ionicModal, Youtube) {
 
   //initialize
+  $scope.nameList = "";
+
   $rootScope.playlists = [];
   $rootScope.currentPlaylist = [];
 
@@ -54,37 +56,31 @@ app.controller('playlistController', function($scope, $rootScope, $ionicModal, Y
 
 
 
-    $ionicModal.fromTemplateUrl('templates/deleteList.html', function($ionicModal) {
-        $scope.deleteListModal = $ionicModal;
-    }, {
-        // Use our scope for the scope of the modal to keep it simple
-        scope: $scope,
-        // The animation we want to use for the modal entrance
-        animation: 'slide-in-up'
-    }); 
+  $ionicModal.fromTemplateUrl('templates/deleteList.html', function($ionicModal) {
+      $scope.deleteListModal = $ionicModal;
+  }, {
+      // Use our scope for the scope of the modal to keep it simple
+      scope: $scope,
+      // The animation we want to use for the modal entrance
+      animation: 'slide-in-up'
+  }); 
 
+  $ionicModal.fromTemplateUrl('templates/createList.html', function($ionicModal) {
+      $scope.createListModal = $ionicModal;
+  }, {
+      scope: $scope,
+      animation: 'slide-in-up'
+  });
 
-
-    $ionicModal.fromTemplateUrl('templates/createList.html', function($ionicModal) {
-        $scope.createListModal = $ionicModal;
-    }, {
-        // Use our scope for the scope of the modal to keep it simple
-        scope: $scope,
-        // The animation we want to use for the modal entrance
-        animation: 'slide-in-up'
-    });
-
-    $ionicModal.fromTemplateUrl('templates/renameList.html', function($ionicModal) {
-        $scope.renameListModal = $ionicModal;
-    }, {
-        // Use our scope for the scope of the modal to keep it simple
-        scope: $scope,
-        // The animation we want to use for the modal entrance
-        animation: 'slide-in-up'
-    }); 
+  $ionicModal.fromTemplateUrl('templates/renameList.html', function($ionicModal) {
+      $scope.renameListModal = $ionicModal;
+  }, {
+      scope: $scope,
+      animation: 'slide-in-up'
+  }); 
 
   $scope.createList = function(listName) {
-    $scope.nameList = "";
+    $scope.createListModal.nameList = "";
     var timePicker = {
       inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
       step: 15,  //Optional
@@ -120,9 +116,7 @@ app.controller('playlistController', function($scope, $rootScope, $ionicModal, Y
   };
 
   $scope.renameList = function(newName) {
-    console.log("renameList");
-
-    $scope.newNameList = "";
+    $scope.renameListModal.newNameList = "";
     
     $rootScope.currentPlaylist.name = newName;
     
