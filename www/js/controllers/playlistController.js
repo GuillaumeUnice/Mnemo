@@ -1,4 +1,4 @@
-app.controller('playlistController', function($scope, $rootScope, $ionicModal, Youtube, $location, localStorageService) {
+app.controller('playlistController', function($scope, $rootScope, $ionicModal, Youtube, $timeout, $location, localStorageService) {
 
   function saveStorage() {
     localStorageService.set("currentPlaylist", $rootScope.currentPlaylist);
@@ -13,7 +13,6 @@ app.controller('playlistController', function($scope, $rootScope, $ionicModal, Y
       $rootScope.playlists = test;
     }
   }
-
 
   // TODO : a supprimer
   /*if(localStorageService.isSupported) {
@@ -74,21 +73,25 @@ app.controller('playlistController', function($scope, $rootScope, $ionicModal, Y
   };
 
   $scope.addVideos = function() {
-    var resultsVideos = [];
-
+    //var resultsVideos = [];
+    loadStorage();
     angular.forEach($scope.videos, function(value, key) {
       if($scope.videos[key].selected) {
-        resultsVideos.push($scope.videos[key]);
+        //resultsVideos.push($scope.videos[key]);
+        $rootScope.currentPlaylist.content.push($scope.videos[key]);
       }
     });
     
-    loadStorage();
+$rootScope.playlists[$rootScope.currentPlaylist.playlistsRang].content = $rootScope.currentPlaylist.content;
 
     console.log($rootScope.playlists);
-    $rootScope.playlists[$rootScope.currentPlaylist.playlistsRang].content = resultsVideos;
-    $rootScope.currentPlaylist.content = resultsVideos;
+    //$rootScope.playlists[$rootScope.currentPlaylist.playlistsRang].content.push(resultsVideos);
+    //$rootScope.currentPlaylist.content.push(resultsVideos);
     saveStorage();
-    $location.path("/playlist");
+    //$timeout(function() {
+       $location.path("/playlist");
+    //}, 3000);
+
 
   };
 
