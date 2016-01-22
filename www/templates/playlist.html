@@ -43,7 +43,7 @@
 		  	<div class="col col-75" ng-if="$root.playlists.length !== 0">
 		  		<div class="row">
 		  			<span ng-repeat="playlist in $root.playlists">
-			  			<button ng-class="{'positive-bg' : playlist.selected}" class="button button-block">
+			  			<button ng-click="changeList(playlist)" ng-class="{'positive-bg' : playlist.selected}" class="button button-block">
 						  Liste : {{ playlist.name }}
 						</button>
 						<!--<button class="button button-block">
@@ -58,97 +58,11 @@
 				</div>
 				</div>
 				<div class="list" style="border: 3px solid $color2; padding-bottom: 10px; height: 65vh;  padding-bottom: 10px; overflow-y:scroll;">
-				    <span class="item item-thumbnail-left item-button-right">
-				      <img src="cover.jpg">
-				      <h2>La vie en rose</h2>
-				      <p>Edith Piaf</p>
-
-				      <button class="button button-large button-positive">
-					      <i class="icon ion-trash-a"></i>
-					  </button>
-				    </span>
-
-				    <span class="item item-thumbnail-left item-button-right">
-				      <img src="cover.jpg">
-				      <h2>La vie en rose</h2>
-				      <p>Edith Piaf</p>
-
-				      <button class="button button-large button-positive">
-					      <i class="icon ion-trash-a"></i>
-					  </button>
-				    </span>
-				    <span class="item item-thumbnail-left item-button-right">
-				      <img src="cover.jpg">
-				      <h2>La vie en rose</h2>
-				      <p>Edith Piaf</p>
-
-				      <button class="button button-large button-positive">
-					      <i class="icon ion-trash-a"></i>
-					  </button>
-				    </span>
-				    <span class="item item-thumbnail-left item-button-right">
-				      <img src="cover.jpg">
-				      <h2>La vie en rose</h2>
-				      <p>Edith Piaf</p>
-
-				      <button class="button button-large button-positive">
-					      <i class="icon ion-trash-a"></i>
-					  </button>
-				    </span>
-				    <span class="item item-thumbnail-left item-button-right">
-				      <img src="cover.jpg">
-				      <h2>La vie en rose</h2>
-				      <p>Edith Piaf</p>
-
-				      <button class="button button-large button-positive">
-					      <i class="icon ion-trash-a"></i>
-					  </button>
-				    </span><span class="item item-thumbnail-left item-button-right">
-				      <img src="cover.jpg">
-				      <h2>La vie en rose</h2>
-				      <p>Edith Piaf</p>
-
-				      <button class="button button-large button-positive">
-					      <i class="icon ion-trash-a"></i>
-					  </button>
-				    </span><span class="item item-thumbnail-left item-button-right">
-				      <img src="cover.jpg">
-				      <h2>La vie en rose</h2>
-				      <p>Edith Piaf</p>
-
-				      <button class="button button-large button-positive">
-					      <i class="icon ion-trash-a"></i>
-					  </button>
-				    </span><span class="item item-thumbnail-left item-button-right">
-				      <img src="cover.jpg">
-				      <h2>La vie en rose</h2>
-				      <p>Edith Piaf</p>
-
-				      <button class="button button-large button-positive">
-					      <i class="icon ion-trash-a"></i>
-					  </button>
-				    </span><span class="item item-thumbnail-left item-button-right">
-				      <img src="cover.jpg">
-				      <h2>La vie en rose</h2>
-				      <p>Edith Piaf</p>
-
-				      <button class="button button-large button-positive">
-					      <i class="icon ion-trash-a"></i>
-					  </button>
-				    </span><span class="item item-thumbnail-left item-button-right">
-				      <img src="cover.jpg">
-				      <h2>La vie en rose</h2>
-				      <p>Edith Piaf</p>
-
-				      <button class="button button-large button-positive">
-					      <i class="icon ion-trash-a"></i>
-					  </button>
-				    </span><span class="item item-thumbnail-left item-button-right">
-				      <img src="cover.jpg">
-				      <h2>La vie en rose</h2>
-				      <p>Edith Piaf</p>
-
-				      <button class="button button-large button-positive">
+				    <span class="item item-thumbnail-left item-button-right" ng-repeat="video in $root.currentPlaylist.content">
+				      <img src="{{ video.snippet.thumbnails.default.url }}">
+				      <h2>{{ video.snippet.title }}</h2>
+				      
+				      <button ng-click="deleteVideo(video)" class="button button-large button-positive">
 					      <i class="icon ion-trash-a"></i>
 					  </button>
 				    </span>

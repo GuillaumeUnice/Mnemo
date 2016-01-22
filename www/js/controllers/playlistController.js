@@ -1,4 +1,30 @@
-app.controller('playlistController', function($scope, $rootScope, $ionicModal, Youtube) {
+app.controller('playlistController', function($scope, $rootScope, $ionicModal, Youtube, $location, localStorageService) {
+
+  function saveStorage() {
+    localStorageService.set("currentPlaylist", $rootScope.currentPlaylist);
+    localStorageService.set("playlists", $rootScope.playlists);
+  }
+
+  function loadStorage() {
+    if(localStorageService.isSupported) {
+      var test = localStorageService.get("currentPlaylist");
+      $rootScope.currentPlaylist = test;
+      test = localStorageService.get("playlists");
+      $rootScope.playlists = test;
+    }
+  }
+
+
+  // TODO : a supprimer
+  /*if(localStorageService.isSupported) {
+    console.log("OKKKK");
+    var test = localStorageService.get("currentPlaylist");
+    $rootScope.currentPlaylist = test;
+    test = localStorageService.get("playlists");
+    $rootScope.playlists = test;
+    //console.log($rootScope.playlists);
+    console.log("NOOOOON");
+  }*/
 
   //initialize
   $scope.nameList = "";
@@ -47,6 +73,43 @@ app.controller('playlistController', function($scope, $rootScope, $ionicModal, Y
     });
   };
 
+  $scope.addVideos = function() {
+    var resultsVideos = [];
+
+    angular.forEach($scope.videos, function(value, key) {
+      if($scope.videos[key].selected) {
+        resultsVideos.push($scope.videos[key]);
+      }
+    });
+    
+    loadStorage();
+
+    console.log($rootScope.playlists);
+    $rootScope.playlists[$rootScope.currentPlaylist.playlistsRang].content = resultsVideos;
+    $rootScope.currentPlaylist.content = resultsVideos;
+    saveStorage();
+    $location.path("/playlist");
+
+  };
+
+  $scope.deleteVideo = function(video) {
+
+    loadStorage();
+
+    //delete list
+    $rootScope.currentPlaylist.content.splice($rootScope.currentPlaylist.content.indexOf(video), 1);
+
+    $rootScope.playlists[$rootScope.currentPlaylist.playlistsRang].content.splice($rootScope.playlists[$rootScope.currentPlaylist.playlistsRang].content.indexOf(video), 1);    
+    saveStorage();
+    
+  };
+
+  $scope.changeList = function(list) {
+
+    var rang = $rootScope.playlists.indexOf(list);
+
+    $rootScope.currentPlaylist = $rootScope.playlists[rang];
+  };
 
 
 
@@ -98,32 +161,42 @@ app.controller('playlistController', function($scope, $rootScope, $ionicModal, Y
     angular.forEach($rootScope.playlists, function(value, key) {
         $rootScope.playlists[key].selected = false;
     });
+    var length = $rootScope.playlists.length;
+    $rootScope.playlists.push({name : listName, content : [], time : timePicker, playlistsRang : length, selected : true});  
+    $rootScope.currentPlaylist = $rootScope.playlists[length];
 
-    $rootScope.playlists.push({name : listName, content : [], time : timePicker, selected : true});  
-    $rootScope.currentPlaylist = $rootScope.playlists[$rootScope.playlists.length -1];
+    saveStorage();
 
+    console.log($rootScope.currentPlaylist);
+    console.log($rootScope.playlists);
     $scope.createListModal.hide();
   };
 
   $scope.deleteList = function() {
+    loadStorage();
     //delete list
     $rootScope.playlists.splice($rootScope.playlists.indexOf($rootScope.currentPlaylist), 1);
     
     if($rootScope.playlists.length !== 0){
       $rootScope.playlists[0].selected = true;
+      $rootScope.currentPlaylist = $rootScope.playlists[0];
+    } else {
+      $rootScope.currentPlaylist = {};
     }
+
     $scope.deleteListModal.hide();
+    saveStorage();
   };
 
   $scope.renameList = function(newName) {
+    loadStorage();
     $scope.renameListModal.newNameList = "";
-    
+
     $rootScope.currentPlaylist.name = newName;
-    
-    var rang = $rootScope.playlists.indexOf($rootScope.currentPlaylist);
-    $rootScope.playlists[rang].name = newName;
+    $rootScope.playlists[$rootScope.currentPlaylist.playlistsRang].name = newName;
 
     $scope.renameListModal.hide();
+    saveStorage();
   };
 
 })
