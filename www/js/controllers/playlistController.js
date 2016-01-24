@@ -1,4 +1,4 @@
-app.controller('playlistController', function($scope, $rootScope, $ionicModal, Youtube, $location, localStorageService) {
+app.controller('playlistController', function($scope, $rootScope, $ionicModal, Youtube, $timeout, $location, localStorageService) {
 
   function saveStorage() {
     localStorageService.set("currentPlaylist", $rootScope.currentPlaylist);
@@ -14,18 +14,6 @@ app.controller('playlistController', function($scope, $rootScope, $ionicModal, Y
     }
   }
 
-
-  // TODO : a supprimer
-  /*if(localStorageService.isSupported) {
-    console.log("OKKKK");
-    var test = localStorageService.get("currentPlaylist");
-    $rootScope.currentPlaylist = test;
-    test = localStorageService.get("playlists");
-    $rootScope.playlists = test;
-    //console.log($rootScope.playlists);
-    console.log("NOOOOON");
-  }*/
-
   //initialize
   $scope.nameList = "";
 
@@ -33,62 +21,52 @@ app.controller('playlistController', function($scope, $rootScope, $ionicModal, Y
   $rootScope.currentPlaylist = [];
 
   $scope.videos = [];
+  /*
   Youtube.getSearchVideos("Edith Piaf").then(function(data){
       $scope.videos = data;
-      console.log(data);
+      //console.log(data);
     }, function(msg){
       console.log('erreur promesses : ' + msg);
     });
-
-  // initialize datetimePicker
-  /*$scope.timePickerObject = {
-    inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
-    step: 15,  //Optional
-    format: 24,  //Optional
-    titleLabel: '24-hour Format',  //Optional
-    setLabel: 'Set',  //Optional
-    closeLabel: 'Close',  //Optional
-    setButtonType: 'button-positive',  //Optional
-    closeButtonType: 'button-stable',  //Optional
-    callback: function (val) {    //Mandatory
-      this.inputEpochTime = val;
-    }
-  };*/
-
+*/
   $scope.selectVideo = function(video) {
     if(video.selected !== undefined) {
       video.selected = !video.selected;
     } else {
       video.selected = true; 
     }
-    console.log(video);
+    //console.log(video);
   };
 
   $scope.sendSearch = function(query) {
     Youtube.getSearchVideos(query).then(function(data){
       $scope.videos = data;
-      console.log(data);
+      //console.log(data);
     }, function(msg){
       console.log('erreur promesses : ' + msg);
     });
   };
 
   $scope.addVideos = function() {
-    var resultsVideos = [];
-
+    //var resultsVideos = [];
+    loadStorage();
     angular.forEach($scope.videos, function(value, key) {
       if($scope.videos[key].selected) {
-        resultsVideos.push($scope.videos[key]);
+        //resultsVideos.push($scope.videos[key]);
+        $rootScope.currentPlaylist.content.push($scope.videos[key]);
       }
     });
     
-    loadStorage();
+$rootScope.playlists[$rootScope.currentPlaylist.playlistsRang].content = $rootScope.currentPlaylist.content;
 
-    console.log($rootScope.playlists);
-    $rootScope.playlists[$rootScope.currentPlaylist.playlistsRang].content = resultsVideos;
-    $rootScope.currentPlaylist.content = resultsVideos;
+    //console.log($rootScope.playlists);
+    //$rootScope.playlists[$rootScope.currentPlaylist.playlistsRang].content.push(resultsVideos);
+    //$rootScope.currentPlaylist.content.push(resultsVideos);
     saveStorage();
-    $location.path("/playlist");
+    //$timeout(function() {
+       $location.path("/playlist");
+    //}, 3000);
+
 
   };
 
@@ -143,6 +121,7 @@ app.controller('playlistController', function($scope, $rootScope, $ionicModal, Y
   }); 
 
   $scope.createList = function(listName) {
+    //alert("createList");
     $scope.createListModal.nameList = "";
     var timePicker = {
       inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
@@ -154,7 +133,11 @@ app.controller('playlistController', function($scope, $rootScope, $ionicModal, Y
       setButtonType: 'button-positive',  //Optional
       closeButtonType: 'button-stable',  //Optional
       callback: function (val) {    //Mandatory
-        this.inputEpochTime = val;
+  
+        $rootScope.currentPlaylist.time.inputEpochTime = val;      
+        $rootScope.playlists[$rootScope.currentPlaylist.playlistsRang].time.inputEpochTime = val;
+        saveStorage();
+        //this.inputEpochTime = val;
       }
     };
 
@@ -166,9 +149,6 @@ app.controller('playlistController', function($scope, $rootScope, $ionicModal, Y
     $rootScope.currentPlaylist = $rootScope.playlists[length];
 
     saveStorage();
-
-    console.log($rootScope.currentPlaylist);
-    console.log($rootScope.playlists);
     $scope.createListModal.hide();
   };
 
