@@ -50,6 +50,12 @@ var app = angular.module('starter', ['ionic', 'ionic-timepicker', 'ionic-datepic
       controller : 'playlistController'
   })
 
+    $stateProvider.state('intro', {
+      url : '/intro',
+      templateUrl : 'templates/intro.html',
+      controller : 'introController'
+    })
+
   $urlRouterProvider.otherwise('/home');
 });
 
