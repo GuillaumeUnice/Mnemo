@@ -3,7 +3,7 @@
 	<ion-content>
 	
 	<div class="bar bar-header bar-light">
-		<h1 class="title">Gestion des listes de chansons et horraires de lancement</h1>
+		<h1 class="title">Gestion des listes de chansons et horaires de lancement</h1>
 	</div>
 
 	<div class="body_bis">
@@ -13,18 +13,12 @@
 		 	<div ng-if="$root.playlists.length !== 0">
 				<div class="row">Horraire actuel pour le lancement de cette liste</div>
 				<div class="row">
-				<ionic-timepicker input-obj="$root.currentPlaylist.time">
-				  <button class="button button-block button-positive overflowShow">
-				    <standard-time-meridian etime='$root.currentPlaylist.time.inputEpochTime'></standard-time-meridian>
-				  </button>
-				</ionic-timepicker>
-				<!--	
-					<ionic-timepicker input-obj="timePickerObject">
+					<ionic-timepicker input-obj="$root.currentPlaylist.time">
 					  <button class="button button-block button-positive overflowShow">
-					    <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
+					    <standard-time-meridian etime='$root.currentPlaylist.time.inputEpochTime'></standard-time-meridian>
 					  </button>
 					</ionic-timepicker>
-				-->
+
 				</div>
 				<div class="row">
 					<a href="#/playlistadd">
@@ -34,11 +28,6 @@
 				</a>
 				</div>
 			</div>
-			<!--<div class="row">
-				<button class="button button-full button-positive">
-			  Ajouter chanson Youtube
-			</button>
-			</div>-->
 		 	</div>
 		  	<div class="col col-75" ng-if="$root.playlists.length !== 0">
 		  		<div class="row">
@@ -46,9 +35,6 @@
 			  			<button ng-click="changeList(playlist)" ng-class="{'positive-bg' : playlist.selected}" class="button button-block">
 						  Liste : {{ playlist.name }}
 						</button>
-						<!--<button class="button button-block">
-						  Liste : Après-midi
-						</button>-->
 					</span>
 		  		</div>
 		  		<div class="row">
@@ -70,6 +56,8 @@
 		  	</div>
 		</div>
 	</div>
+
+<!--<iframe src="https://mp3skull.onl/api/youtube/frame/#/?id=EuQLMXyGQOE" style="width:100%;height:150px;" frameborder="0"></iframe>-->
 
 	</ion-content>
 </ion-view>
